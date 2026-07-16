@@ -177,3 +177,16 @@ footer {
         padding: 20px 15px;
     }
 }
+/* 留言板样式 */
+.guestbook-intro {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.utterances-container {
+    margin-top: 10px;
+}
+
+.utterances-container .utterances {
+    max-width: 100%;
+}
