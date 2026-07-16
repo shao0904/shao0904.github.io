@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的个人主页</title>
+    <title>邵铭祖的个人主页</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
         <header class="hero">
             <div class="avatar">
-                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=shao0904" alt="头像">
+                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=shaomingzu" alt="头像">
             </div>
-            <h1>你好，我是 shao0904 👋</h1>
+            <h1>你好，我是 邵铭祖 👋</h1>
             <p class="subtitle">欢迎来到我的个人网站</p>
         </header>
 
@@ -51,13 +51,15 @@
 
         <section class="guestbook">
             <h2>📝 留言板</h2>
-            <p class="guestbook-intro">欢迎留下你的足迹！使用 GitHub 账号即可留言，实时更新</p>
-            <div class="guestbook-actions">
-                <a href="https://github.com/shao0904/shao0904.github.io/issues/1" target="_blank" class="btn">✍️ 我要留言</a>
-                <button onclick="loadComments()" class="btn btn-secondary">🔄 刷新</button>
-            </div>
-            <div id="comments-container" class="comments-container">
-                <p class="loading">加载中...</p>
+            <p class="guestbook-intro">欢迎留下你的足迹！使用 GitHub 账号登录即可留言，实时更新</p>
+            <div class="utterances-container">
+                <script src="https://utteranc.es/client.js"
+                        repo="shao0904/shao0904.github.io"
+                        issue-number="1"
+                        theme="github-light"
+                        crossorigin="anonymous"
+                        async>
+                </script>
             </div>
         </section>
 
@@ -74,47 +76,8 @@
         </section>
 
         <footer>
-            <p>© 2026 shao0904. Made with ❤️ and GitHub Pages</p>
+            <p>© 2026 邵铭祖. Made with ❤️ and GitHub Pages</p>
         </footer>
     </div>
-
-    <script>
-        function loadComments() {
-            const container = document.getElementById('comments-container');
-            container.innerHTML = '<p class="loading">加载中...</p>';
-            
-            fetch('https://api.github.com/repos/shao0904/shao0904.github.io/issues/1/comments')
-                .then(response => response.json())
-                .then(comments => {
-                    if (!Array.isArray(comments) || comments.length === 0) {
-                        container.innerHTML = '<p class="no-comments">还没有留言，快来抢沙发吧！</p>';
-                        return;
-                    }
-                    
-                    let html = '';
-                    comments.forEach(comment => {
-                        const date = new Date(comment.created_at).toLocaleString('zh-CN');
-                        html += `
-                            <div class="comment">
-                                <img src="${comment.user.avatar_url}" alt="${comment.user.login}" class="comment-avatar">
-                                <div class="comment-content">
-                                    <div class="comment-header">
-                                        <span class="comment-author">${comment.user.login}</span>
-                                        <span class="comment-date">${date}</span>
-                                    </div>
-                                    <div class="comment-body">${comment.body}</div>
-                                </div>
-                            </div>
-                        `;
-                    });
-                    container.innerHTML = html;
-                })
-                .catch(error => {
-                    container.innerHTML = '<p class="error">加载失败，请稍后重试</p>';
-                });
-        }
-
-        document.addEventListener('DOMContentLoaded', loadComments);
-    </script>
 </body>
 </html>
